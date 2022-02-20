@@ -13,11 +13,11 @@ class Mesher:
         # the global dof of each elem
         # idx: A tuple informing the position for assembly of computed entries
         edofMat=np.zeros((mesh['nelx']*mesh['nely'],8),dtype=int)
-        for elx in range(mesh['nelx']):
-            for ely in range(mesh['nely']):
-                el = ely+elx*mesh['nely']
-                n1=(mesh['nely']+1)*elx+ely
-                n2=(mesh['nely']+1)*(elx+1)+ely
+        for ely in range(mesh['nely']):
+            for elx in range(mesh['nelx']):
+                el = elx+ely*mesh['nelx']
+                n1=(mesh['nelx']+1)*ely+elx
+                n2=(mesh['nelx']+1)*(ely+1)+elx
                 # edofMat[el,:]=np.array([2*n1+2, 2*n1+3, 2*n2+2,\
                 #                 2*n2+3,2*n2, 2*n2+1, 2*n1, 2*n1+1]);
                 edofMat[el,:]=np.array([2*n1, 2*n1+1, 2*n1+2,\
